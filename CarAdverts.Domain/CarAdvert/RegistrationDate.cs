@@ -7,6 +7,8 @@ namespace CarAdverts.Domain.CarAdvert
 {
     public class RegistrationDate : ValueObject<RegistrationDate>
     {
+        public const string BaseDateFormat = "yyyy-MM-dd"; 
+
         public DateTime? Date { get; protected set; }
 
         private RegistrationDate()
@@ -15,7 +17,7 @@ namespace CarAdverts.Domain.CarAdvert
 
         protected RegistrationDate(string date)
         {
-            if (!DateTime.TryParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime firstResult))
+            if (!DateTime.TryParseExact(date, BaseDateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime firstResult))
             {
                 if (!DateTime.TryParseExact(date, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime secondResult))
                 {
@@ -36,7 +38,7 @@ namespace CarAdverts.Domain.CarAdvert
             => Date.HasValue ? Date.Value.Date.GetHashCode() : 0;
 
         public static RegistrationDate Create(string date) => new RegistrationDate(date);
-        public static RegistrationDate Create(DateTime date) => new RegistrationDate(date.ToString("yyyy-DD-mm"));
+        public static RegistrationDate Create(DateTime date) => new RegistrationDate(date.ToString(BaseDateFormat));
         public static RegistrationDate NotSpecified => new RegistrationDate();
     }
 }
