@@ -13,6 +13,8 @@ namespace CarAdverts.Domain.CarAdvert
         public int? Mileage { get; protected set; }
         public RegistrationDate FirstRegistration { get; protected set; }
 
+        private CarAdvert() { }
+
         /// <summary>
         /// Constracts new vehicle
         /// </summary>
@@ -151,6 +153,8 @@ namespace CarAdverts.Domain.CarAdvert
         protected override bool AreKeysEquals(Guid self, Guid other)
             => self.Equals(other);
 
+        #region Fabrics
+
         public static CarAdvert CreateNew(string title, decimal price, FuelType fuelType)
             => new CarAdvert(title, price, fuelType);
 
@@ -175,5 +179,7 @@ namespace CarAdverts.Domain.CarAdvert
 
         public static CarAdvert Create(CarAdvertDto carAdvertDto)
             => carAdvertDto.New ? CreateNew(carAdvertDto) : CreateOld(carAdvertDto);
+
+        #endregion
     }
 }

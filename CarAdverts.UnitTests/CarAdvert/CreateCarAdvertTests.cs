@@ -97,7 +97,6 @@ namespace CarAdverts.UnitTests.CarAdvert
         [Test]
         public void CarAdvert_Created_From_Dto_Should_Be_New()
         {
-
             var carAdvertDto = new CarAdvertDto
             {
                 Title = "Audi A8",
