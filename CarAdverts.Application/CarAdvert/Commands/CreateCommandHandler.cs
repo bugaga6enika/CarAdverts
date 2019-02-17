@@ -24,7 +24,7 @@ namespace CarAdverts.Application.CarAdvert.Commands
         {
             var dto = Mapper.Map<Domain.CarAdvert.CarAdvertDto>(request);
             var carAdvertAggregateRoot = Domain.CarAdvert.CarAdvert.Create(dto);
-            var carAdvertEntity = await _carAdvertRepository.CreateAsync(carAdvertAggregateRoot);
+            var carAdvertEntity = await _carAdvertRepository.CreateAsync(carAdvertAggregateRoot).ConfigureAwait(false);
             await _unitOfWork.CommitAsync();
 
             return Mapper.Map<Dtos.CarAdvertDto>(carAdvertEntity);

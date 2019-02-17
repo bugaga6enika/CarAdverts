@@ -22,7 +22,7 @@ namespace CarAdverts.Controllers
         [Route("{id:guid}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var response = await _mediator.Send(new GetByIdQuery { Id = id });
+            var response = await _mediator.Send(new GetByIdQuery { Id = id }).ConfigureAwait(false);
 
             return Ok(response);
         }
@@ -30,7 +30,7 @@ namespace CarAdverts.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] GetAllQuery getAllQuery)
         {
-            var response = await _mediator.Send(getAllQuery);
+            var response = await _mediator.Send(getAllQuery).ConfigureAwait(false);
 
             return Ok(response);
         }
@@ -38,7 +38,7 @@ namespace CarAdverts.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateCommand createCommand)
         {
-            var response = await _mediator.Send(createCommand);
+            var response = await _mediator.Send(createCommand).ConfigureAwait(false);
 
             return Ok(response);
         }
@@ -47,7 +47,7 @@ namespace CarAdverts.Controllers
         [Route("{id:guid}")]
         public async Task<IActionResult> Put(Guid id, [FromBody] CreateCommand createCommand)
         {
-            await _mediator.Send(new UpdateCommand(id, createCommand));
+            await _mediator.Send(new UpdateCommand(id, createCommand)).ConfigureAwait(false);
 
             return Ok();
         }
@@ -56,7 +56,7 @@ namespace CarAdverts.Controllers
         [Route("{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            await _mediator.Send(new DeleteCommand { Id = id });
+            await _mediator.Send(new DeleteCommand { Id = id }).ConfigureAwait(false);
 
             return Ok();
         }

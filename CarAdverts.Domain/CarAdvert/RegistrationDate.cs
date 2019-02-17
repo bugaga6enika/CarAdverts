@@ -7,7 +7,7 @@ namespace CarAdverts.Domain.CarAdvert
 {
     public class RegistrationDate : ValueObject<RegistrationDate>
     {
-        public const string BaseDateFormat = "yyyy-MM-dd"; 
+        public const string BaseDateFormat = "yyyy-MM-dd";
 
         public DateTime? Date { get; protected set; }
 
@@ -24,11 +24,21 @@ namespace CarAdverts.Domain.CarAdvert
                     throw new ValidationException("Invalid date format", "Registration Date");
                 }
 
-                Date = secondResult;
+                Date = CheckDate(secondResult);
                 return;
             }
 
-            Date = firstResult;
+            Date = CheckDate(firstResult);
+        }
+
+        private DateTime CheckDate(DateTime dateTime)
+        {
+            if (DateTime.Compare(dateTime.Date, DateTime.Now.Date) < 0)
+            {
+                return dateTime;
+            }
+
+            throw new ValidationException("Value must be less then today", "Registration Date");
         }
 
         protected override bool EqualsCore(RegistrationDate other)

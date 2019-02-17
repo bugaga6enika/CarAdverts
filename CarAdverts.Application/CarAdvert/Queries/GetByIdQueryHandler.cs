@@ -17,7 +17,7 @@ namespace CarAdverts.Application.CarAdvert.Queries
 
         public async Task<Dtos.CarAdvertDto> Handle(GetByIdQuery request, CancellationToken cancellationToken)
         {
-            var carAdvert = await _carAdvertRepository.GetByIdAsync(request.Id);
+            var carAdvert = await _carAdvertRepository.GetByIdAsync(request.Id).ConfigureAwait(false);
 
             return Mapper.Map<Dtos.CarAdvertDto>(carAdvert);
         }

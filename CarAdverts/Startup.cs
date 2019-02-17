@@ -58,10 +58,16 @@ namespace CarAdverts
             {
                 app.UseDeveloperExceptionPage();
 
-                using (var serviceScope = app.ApplicationServices.CreateScope())
+                try
                 {
-                    DataProvider.Seed(serviceScope.ServiceProvider);
+                    using (var serviceScope = app.ApplicationServices.CreateScope())
+                    {
+                        DataProvider.Seed(serviceScope.ServiceProvider);
+                    }
                 }
+                catch (System.Exception e)
+                {
+                }               
             }
             else
             {
