@@ -28,6 +28,8 @@ namespace CarAdverts.Domain.CarAdvert
             SetPrice(price);
             SetFuel(fuelType);
             SetAsNew();
+
+            //ToDo: raise create event
         }
 
         /// <summary>
@@ -41,6 +43,8 @@ namespace CarAdverts.Domain.CarAdvert
         private CarAdvert(string title, decimal price, FuelType fuelType, int mileage, string firstRegistrationDate) : this(title, price, fuelType)
         {
             SetAsOld(mileage, firstRegistrationDate);
+
+            //ToDo: raise create event
         }
 
         /// <summary>
@@ -54,6 +58,8 @@ namespace CarAdverts.Domain.CarAdvert
         private CarAdvert(string title, decimal price, FuelType fuelType, int mileage, DateTime firstRegistrationDate) : this(title, price, fuelType)
         {
             SetAsOld(mileage, firstRegistrationDate);
+
+            //ToDo: raise create event
         }
 
         #region Setters
@@ -152,12 +158,56 @@ namespace CarAdverts.Domain.CarAdvert
                     throw new ValidationException("Value cannot be null", nameof(Mileage));
                 }
 
-                SetAsOld(carAdvertDto.Mileage.Value, carAdvertDto.FirstRegistrationDate);
+                SetAsOld(carAdvertDto.Mileage.Value, carAdvertDto.FirstRegistration);
             }
+
+            //ToDo: raise update event
         }
+
+        #region Overrides
 
         protected override bool AreKeysEquals(Guid self, Guid other)
             => self.Equals(other);
+
+        protected override bool AreEquals(IEntity<Guid> self, IEntity<Guid> other)
+        {
+            var _this = self as CarAdvert;
+            var _other = other as CarAdvert;
+
+            if (_this.Title != _other.Title)
+            {
+                return false;
+            }
+
+            if (_this.Price != _other.Price)
+            {
+                return false;
+            }
+
+            if (_this.Fuel != _other.Fuel)
+            {
+                return false;
+            }
+
+            if (_this.New != _other.New)
+            {
+                return false;
+            }
+
+            if (_this.Mileage != _other.Mileage)
+            {
+                return false;
+            }
+
+            if (_this.FirstRegistration != _other.FirstRegistration)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion
 
         #region Fabrics
 
@@ -177,7 +227,7 @@ namespace CarAdverts.Domain.CarAdvert
                 throw new ValidationException("Value must be greater then 0", nameof(Mileage));
             }
 
-            return new CarAdvert(carAdvertDto.Title, carAdvertDto.Price, carAdvertDto.Fuel, carAdvertDto.Mileage.Value, carAdvertDto.FirstRegistrationDate);
+            return new CarAdvert(carAdvertDto.Title, carAdvertDto.Price, carAdvertDto.Fuel, carAdvertDto.Mileage.Value, carAdvertDto.FirstRegistration);
         }
 
         public static CarAdvert CreateOld(string title, decimal price, FuelType fuelType, int mileage, DateTime firstRegistrationDate)
@@ -185,6 +235,8 @@ namespace CarAdverts.Domain.CarAdvert
 
         public static CarAdvert Create(CarAdvertDto carAdvertDto)
             => carAdvertDto.New ? CreateNew(carAdvertDto) : CreateOld(carAdvertDto);
+
+
 
         #endregion
     }

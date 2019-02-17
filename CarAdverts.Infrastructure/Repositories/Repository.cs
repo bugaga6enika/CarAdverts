@@ -49,11 +49,18 @@ namespace CarAdverts.Infrastructure.Repositories
             return Task.CompletedTask;
         }
 
-        public virtual Task DeleteAsync(TKey key)
+        public virtual async Task DeleteAsync(TKey key)
         {
-            DbSet.Remove(DbSet.Find(key));
+            var entity = await DbSet.FindAsync(key);
 
-            return Task.CompletedTask;
+            if (entity == default(TAggregateRoot))
+            {
+                throw new NoEntryException<TKey>("No entry found for given key", key);
+            }
+
+            DbSet.Remove(entity);
+
+            // ToDo: raise delete event
         }
 
         protected virtual IQueryable<TAggregateRoot> OrderBy(IQueryable<TAggregateRoot> query, string sortOptions)
