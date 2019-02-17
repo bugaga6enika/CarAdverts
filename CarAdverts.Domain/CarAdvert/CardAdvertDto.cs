@@ -7,6 +7,6 @@
         public FuelType Fuel { get; set; }
         public bool New { get; set; }
         public int? Mileage { get; set; }
-        public string FirstRegistrationDate { get; set; }
+        public string FirstRegistration { get; set; }
     }
 }

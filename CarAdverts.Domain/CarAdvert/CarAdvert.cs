@@ -152,7 +152,7 @@ namespace CarAdverts.Domain.CarAdvert
                     throw new ValidationException("Value cannot be null", nameof(Mileage));
                 }
 
-                SetAsOld(carAdvertDto.Mileage.Value, carAdvertDto.FirstRegistrationDate);
+                SetAsOld(carAdvertDto.Mileage.Value, carAdvertDto.FirstRegistration);
             }
         }
 
@@ -177,7 +177,7 @@ namespace CarAdverts.Domain.CarAdvert
                 throw new ValidationException("Value must be greater then 0", nameof(Mileage));
             }
 
-            return new CarAdvert(carAdvertDto.Title, carAdvertDto.Price, carAdvertDto.Fuel, carAdvertDto.Mileage.Value, carAdvertDto.FirstRegistrationDate);
+            return new CarAdvert(carAdvertDto.Title, carAdvertDto.Price, carAdvertDto.Fuel, carAdvertDto.Mileage.Value, carAdvertDto.FirstRegistration);
         }
 
         public static CarAdvert CreateOld(string title, decimal price, FuelType fuelType, int mileage, DateTime firstRegistrationDate)

@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BA159A3F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarAdverts.UnitTests", "CarAdverts.UnitTests\CarAdverts.UnitTests.csproj", "{01EC8090-46E8-4519-8242-917E0C9D3EF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAdverts.Application", "CarAdverts.Application\CarAdverts.Application.csproj", "{863F201E-EBBF-49C3-9E44-B2C5AE62ED22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarAdverts.Application", "CarAdverts.Application\CarAdverts.Application.csproj", "{863F201E-EBBF-49C3-9E44-B2C5AE62ED22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAdverts.IntegrationTests", "CarAdverts.IntegrationTests\CarAdverts.IntegrationTests.csproj", "{B8A585EE-9EB0-4FC0-BE81-BD6879E7C51D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,12 +49,17 @@ Global
 		{863F201E-EBBF-49C3-9E44-B2C5AE62ED22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{863F201E-EBBF-49C3-9E44-B2C5AE62ED22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{863F201E-EBBF-49C3-9E44-B2C5AE62ED22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8A585EE-9EB0-4FC0-BE81-BD6879E7C51D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8A585EE-9EB0-4FC0-BE81-BD6879E7C51D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8A585EE-9EB0-4FC0-BE81-BD6879E7C51D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8A585EE-9EB0-4FC0-BE81-BD6879E7C51D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{01EC8090-46E8-4519-8242-917E0C9D3EF4} = {BA159A3F-4652-4347-B2A7-FF8D115E9C6D}
+		{B8A585EE-9EB0-4FC0-BE81-BD6879E7C51D} = {BA159A3F-4652-4347-B2A7-FF8D115E9C6D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CB0926EA-6F6E-479F-B3C6-45A737803CB6}
