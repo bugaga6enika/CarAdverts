@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
@@ -27,13 +28,18 @@ namespace CarAdverts
                 .AddCors()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.Configure<MvcOptions>(options =>
+            {
+                options.OutputFormatters.Remove(new XmlDataContractSerializerOutputFormatter());
+            });
+
             services.AddSwaggerGen(s =>
             {
                 s.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
                     Title = "CarAdvert",
-                    Description = "CarAdvert WEB API Swagger"                    
+                    Description = "CarAdvert WEB API Swagger"
                 });
             });
         }
