@@ -13,5 +13,20 @@ namespace CarAdverts.Application.CarAdvert.Commands
         public bool New { get; set; }
         public int? Mileage { get; set; }
         public string FirstRegistrationDate { get; set; }
+
+        public UpdateCommand()
+        {
+        }
+
+        public UpdateCommand(Guid id, CreateCommand createCommand)
+        {
+            Id = id;
+            Title = createCommand.Title;
+            Price = createCommand.Price;
+            Fuel = createCommand.Fuel;
+            New = createCommand.New;
+            Mileage = createCommand.Mileage;
+            FirstRegistrationDate = createCommand.FirstRegistrationDate;
+        }
     }
 }
