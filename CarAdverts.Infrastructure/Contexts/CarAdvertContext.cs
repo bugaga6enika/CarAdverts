@@ -4,7 +4,6 @@ using CarAdverts.Infrastructure.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.IO;
 
 namespace CarAdverts.Infrastructure.Contexts
 {
@@ -12,9 +11,12 @@ namespace CarAdverts.Infrastructure.Contexts
     {
         public DbSet<CarAdvert> CarAdverts { get; set; }
 
-        public CarAdvertContext(DbContextOptions<CarAdvertContext> options)
+        private readonly IConfiguration _configuration;
+
+        public CarAdvertContext(DbContextOptions<CarAdvertContext> options, IConfiguration configuration)
             : base(options)
         {
+            _configuration = configuration;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,12 +28,7 @@ namespace CarAdverts.Infrastructure.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();            
-
-            optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
         }
     }
 }

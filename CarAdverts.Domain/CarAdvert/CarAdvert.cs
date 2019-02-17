@@ -84,6 +84,8 @@ namespace CarAdverts.Domain.CarAdvert
             {
                 throw new ValidationException("Value must be set", nameof(Fuel));
             }
+
+            Fuel = fuelType;
         }
 
         private void SetAsNew()
@@ -102,6 +104,8 @@ namespace CarAdverts.Domain.CarAdvert
             {
                 throw new ValidationException("Value must be greater then 0", nameof(Mileage));
             }
+
+            Mileage = mileage;
         }
 
         private void SetAsOld(int mileage, DateTime firstRegistrationDate)
@@ -132,21 +136,23 @@ namespace CarAdverts.Domain.CarAdvert
                 SetPrice(carAdvertDto.Price);
             }
 
-            if (New != carAdvertDto.New)
+            if (Fuel != carAdvertDto.Fuel)
             {
-                if (carAdvertDto.New)
-                {
-                    SetAsNew();
-                }
-                else
-                {
-                    if (!carAdvertDto.Mileage.HasValue)
-                    {
-                        throw new ValidationException("Value cannot be null", nameof(Mileage));
-                    }
+                SetFuel(carAdvertDto.Fuel);
+            }
 
-                    SetAsOld(carAdvertDto.Mileage.Value, carAdvertDto.FirstRegistrationDate);
+            if (carAdvertDto.New)
+            {
+                SetAsNew();
+            }
+            else
+            {
+                if (!carAdvertDto.Mileage.HasValue)
+                {
+                    throw new ValidationException("Value cannot be null", nameof(Mileage));
                 }
+
+                SetAsOld(carAdvertDto.Mileage.Value, carAdvertDto.FirstRegistrationDate);
             }
         }
 
