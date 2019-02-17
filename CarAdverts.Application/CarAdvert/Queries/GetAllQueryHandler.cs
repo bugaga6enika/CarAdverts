@@ -18,7 +18,7 @@ namespace CarAdverts.Application.CarAdvert.Queries
 
         public async Task<IQueryable<Dtos.CarAdvertDto>> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
-            var carAdverts = await _carAdvertRepository.GetAsync(request.OrderBy);
+            var carAdverts = await _carAdvertRepository.GetAsync(request.OrderBy).ConfigureAwait(false);
 
             return carAdverts.ProjectTo<Dtos.CarAdvertDto>();
         }

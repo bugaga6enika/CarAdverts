@@ -38,7 +38,7 @@ namespace CarAdverts.Infrastructure.Repositories
 
         public virtual async Task<TAggregateRoot> CreateAsync(TAggregateRoot aggregateRoot)
         {
-            var entityEntry = await DbSet.AddAsync(aggregateRoot);
+            var entityEntry = await DbSet.AddAsync(aggregateRoot).ConfigureAwait(false);
             return entityEntry.Entity;
         }
 
@@ -51,7 +51,7 @@ namespace CarAdverts.Infrastructure.Repositories
 
         public virtual async Task DeleteAsync(TKey key)
         {
-            var entity = await DbSet.FindAsync(key);
+            var entity = await DbSet.FindAsync(key).ConfigureAwait(false);
 
             if (entity == default(TAggregateRoot))
             {
