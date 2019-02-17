@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarAdverts.UnitTests", "Car
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarAdverts.Application", "CarAdverts.Application\CarAdverts.Application.csproj", "{863F201E-EBBF-49C3-9E44-B2C5AE62ED22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAdverts.IntegrationTests", "CarAdverts.IntegrationTests\CarAdverts.IntegrationTests.csproj", "{B8A585EE-9EB0-4FC0-BE81-BD6879E7C51D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarAdverts.IntegrationTests", "CarAdverts.IntegrationTests\CarAdverts.IntegrationTests.csproj", "{B8A585EE-9EB0-4FC0-BE81-BD6879E7C51D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{159F506F-AAC1-4EF6-AE8A-49FE2DCE596F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{F1F24505-CDCE-4F24-A59E-28E21B6FB640} = {159F506F-AAC1-4EF6-AE8A-49FE2DCE596F}
+		{54227FB4-6C3D-4002-BC2B-F77A58269912} = {159F506F-AAC1-4EF6-AE8A-49FE2DCE596F}
 		{01EC8090-46E8-4519-8242-917E0C9D3EF4} = {BA159A3F-4652-4347-B2A7-FF8D115E9C6D}
 		{B8A585EE-9EB0-4FC0-BE81-BD6879E7C51D} = {BA159A3F-4652-4347-B2A7-FF8D115E9C6D}
 	EndGlobalSection

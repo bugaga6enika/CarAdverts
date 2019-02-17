@@ -8,13 +8,27 @@
         {
             var compareTo = obj as Entity<TKey>;
 
-            if (ReferenceEquals(this, compareTo)) return true;
-            if (ReferenceEquals(null, compareTo)) return false;
+            if (ReferenceEquals(this, compareTo))
+            {
+                return true;
+            }
 
-            return AreKeysEquals(Id, compareTo.Id);
+            if (ReferenceEquals(null, compareTo))
+            {
+                return false;
+            }
+
+            if (!AreKeysEquals(Id, compareTo.Id))
+            {
+                return false;
+            }
+
+            return AreEquals(this, compareTo);
         }
 
         protected abstract bool AreKeysEquals(TKey self, TKey other);
+
+        protected abstract bool AreEquals(IEntity<TKey> self, IEntity<TKey> other);
 
         public static bool operator ==(Entity<TKey> a, Entity<TKey> b)
         {
