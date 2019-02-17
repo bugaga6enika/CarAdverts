@@ -22,12 +22,30 @@ namespace CarAdverts.UnitTests.CarAdvert
         }
 
         [TestCase("23-01-2019")]
-        [TestCase("2019-02-30")]
+        [TestCase("2019-02-30")]       
         public void RegistrationDate_Must_Throw_Validation_Exception(string date)
         {
             Action createRegistrationDateAction = () => RegistrationDate.Create(date);
 
             createRegistrationDateAction.Should().ThrowExactly<ValidationException>();
+        }
+
+        [Test]
+        public void RegistrationDate_Must_Throw_Validation_Exception()
+        {
+            Action createRegistrationDateAction = () => RegistrationDate.Create(DateTime.Now.AddDays(1));
+
+            createRegistrationDateAction.Should().ThrowExactly<ValidationException>();
+        }
+
+        [Test]
+        public void RegistrationDate_Must_Be_Valid()
+        {
+            var date = DateTime.Now.AddDays(-1);
+
+            var firstRegistrationDate =  RegistrationDate.Create(date);
+
+            firstRegistrationDate.Date.Should().Be(date.Date);
         }
 
         [TestCase("20190216", "2019-02-16")]
@@ -52,6 +70,6 @@ namespace CarAdverts.UnitTests.CarAdvert
             var areEqual = firstDate == secondDate;
 
             areEqual.Should().Be(true);
-        }
+        }       
     }
 }

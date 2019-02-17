@@ -23,10 +23,10 @@ namespace CarAdverts.Application.CarAdvert.Commands
         public async Task<Unit> Handle(UpdateCommand request, CancellationToken cancellationToken)
         {
             var dto = Mapper.Map<Domain.CarAdvert.CarAdvertDto>(request);
-            var carAdvertAggregateRoot = await _carAdvertRepository.GetByIdAsync(request.Id);
+            var carAdvertAggregateRoot = await _carAdvertRepository.GetByIdAsync(request.Id).ConfigureAwait(false);
             carAdvertAggregateRoot.Update(dto);
-            await _carAdvertRepository.UpdateAsync(carAdvertAggregateRoot);
-            await _unitOfWork.CommitAsync();
+            await _carAdvertRepository.UpdateAsync(carAdvertAggregateRoot).ConfigureAwait(false);
+            await _unitOfWork.CommitAsync().ConfigureAwait(false);
 
             return Unit.Value;
         }

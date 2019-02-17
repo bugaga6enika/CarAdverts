@@ -23,7 +23,7 @@ namespace CarAdverts.IntegrationTests.Configurations
                 {
                     options.UseInMemoryDatabase("InMemoryAppDb");
                     options.UseInternalServiceProvider(serviceProvider);
-                });
+                });         
 
                 // Build the service provider.
                 var sp = services.BuildServiceProvider();
