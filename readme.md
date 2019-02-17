@@ -6,7 +6,7 @@ Build using ASP.NET Core, Entity Framework, DDD aproach and others.
 ## Usage
 
 Restore nuget packages and run CarAdverts project.
-With usage of swagger you can try it in action.
+With usage of swagger you can try it in action, just go to /swagger.
 
 ## Known issues
 
