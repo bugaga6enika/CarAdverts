@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarAdverts.Infrastructure",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BA159A3F-4652-4347-B2A7-FF8D115E9C6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAdverts.UnitTests", "CarAdverts.UnitTests\CarAdverts.UnitTests.csproj", "{01EC8090-46E8-4519-8242-917E0C9D3EF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarAdverts.UnitTests", "CarAdverts.UnitTests\CarAdverts.UnitTests.csproj", "{01EC8090-46E8-4519-8242-917E0C9D3EF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarAdverts.Application", "CarAdverts.Application\CarAdverts.Application.csproj", "{863F201E-EBBF-49C3-9E44-B2C5AE62ED22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{01EC8090-46E8-4519-8242-917E0C9D3EF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01EC8090-46E8-4519-8242-917E0C9D3EF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01EC8090-46E8-4519-8242-917E0C9D3EF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{863F201E-EBBF-49C3-9E44-B2C5AE62ED22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{863F201E-EBBF-49C3-9E44-B2C5AE62ED22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{863F201E-EBBF-49C3-9E44-B2C5AE62ED22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{863F201E-EBBF-49C3-9E44-B2C5AE62ED22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
