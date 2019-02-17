@@ -7,8 +7,8 @@ namespace CarAdverts.Domain.Core.Persistence
     /// </summary>
     /// <typeparam name="TAggregateRoot"></typeparam>
     /// <typeparam name="TKey"></typeparam>
-    public interface IContext<TAggregateRoot, TKey> 
-        where TAggregateRoot : IAggregateRoot<TKey> 
+    public interface IContext<TAggregateRoot, TKey>
+        where TAggregateRoot : IAggregateRoot<TKey>
         where TKey : struct
     {
     }

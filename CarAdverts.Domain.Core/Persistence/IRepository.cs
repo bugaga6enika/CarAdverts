@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 
 namespace CarAdverts.Domain.Core.Persistence
 {
-    public interface IRepository<TEntity, TKey>
-        where TEntity : IEntity<TKey>
+    public interface IRepository<TAggregateRoot, TKey>
+        where TAggregateRoot : IAggregateRoot<TKey>
         where TKey : struct
     {
-        Task<TEntity> GetByIdAsync(TKey key);
-        Task<TEntity> Create(TEntity entity);
-        Task Update(TEntity entity);
+        Task<TAggregateRoot> GetByIdAsync(TKey key);
+        Task<TAggregateRoot> Create(TAggregateRoot aggregateRoot);
+        Task Update(TAggregateRoot aggregateRoot);
         Task Delete(TKey key);
     }
 }
