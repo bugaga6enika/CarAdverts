@@ -12,7 +12,7 @@ namespace CarAdverts.Application.CarAdvert.Commands
         public FuelType Fuel { get; set; }
         public bool New { get; set; }
         public int? Mileage { get; set; }
-        public string FirstRegistrationDate { get; set; }
+        public string FirstRegistration { get; set; }
 
         public UpdateCommand()
         {
@@ -26,7 +26,7 @@ namespace CarAdverts.Application.CarAdvert.Commands
             Fuel = createCommand.Fuel;
             New = createCommand.New;
             Mileage = createCommand.Mileage;
-            FirstRegistrationDate = createCommand.FirstRegistrationDate;
+            FirstRegistration = createCommand.FirstRegistration;
         }
     }
 }

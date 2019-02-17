@@ -1,4 +1,5 @@
-﻿using CarAdverts.Domain.Core.Validation;
+﻿using CarAdverts.Domain.Core.Persistence;
+using CarAdverts.Domain.Core.Validation;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
@@ -37,6 +38,12 @@ namespace CarAdverts.Middlewares
             if (exception is ValidationException validationException)
             {
                 message = $"Validation error for {validationException.ParamName}: {validationException.Message}";
+                statusCode = (int)HttpStatusCode.BadRequest;
+            }
+
+            if (exception is NoEntryException<Guid> noEntryException)
+            {
+                message = $"Bad request: {noEntryException.Message}. Key: {noEntryException.Id}";
                 statusCode = (int)HttpStatusCode.BadRequest;
             }
 

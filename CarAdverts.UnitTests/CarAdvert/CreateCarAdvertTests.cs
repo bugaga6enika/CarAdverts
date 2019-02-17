@@ -66,7 +66,7 @@ namespace CarAdverts.UnitTests.CarAdvert
                 Title = "Audi A8",
                 Fuel = FuelType.Diesel,
                 New = false,
-                FirstRegistrationDate = "2017-12-05"
+                FirstRegistration = "2017-12-05"
             };
 
             Action carAdvertCreateAction = () => Domain.CarAdvert.CarAdvert.CreateOld(carAdvertDto);
@@ -84,7 +84,7 @@ namespace CarAdverts.UnitTests.CarAdvert
                 Price = 25550,
                 New = false,
                 Mileage = 34500,
-                FirstRegistrationDate = "2017-12-05"
+                FirstRegistration = "2017-12-05"
             };
 
             var carAdvert = Domain.CarAdvert.CarAdvert.Create(carAdvertDto);
@@ -104,7 +104,7 @@ namespace CarAdverts.UnitTests.CarAdvert
                 Price = 25550,
                 New = true,
                 Mileage = 34500,
-                FirstRegistrationDate = "2017-12-05"
+                FirstRegistration = "2017-12-05"
             };
 
             var carAdvert = Domain.CarAdvert.CarAdvert.Create(carAdvertDto);
