@@ -1,10 +1,9 @@
-﻿using CarAdverts.Infrastructure.Contexts;
+﻿using CarAdverts.Application.Configurations;
 using CarAdverts.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
@@ -23,7 +22,7 @@ namespace CarAdverts
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Application.Configurations.IoC.RegisterServices(services);
+            IoC.RegisterServices(services);
 
             services.AddMvcCore()
                 .AddJsonFormatters()
@@ -58,6 +57,11 @@ namespace CarAdverts
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                using (var serviceScope = app.ApplicationServices.CreateScope())
+                {
+                    DataProvider.Seed(serviceScope.ServiceProvider);
+                }
             }
             else
             {
@@ -80,13 +84,7 @@ namespace CarAdverts
             app.UseSwaggerUI(s =>
             {
                 s.SwaggerEndpoint("/swagger/v1/swagger.json", "CarAdvert WEB API v1.0");
-            });
-
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetService<CarAdvertContext>();
-                context.Database.Migrate();
-            }
+            });            
         }
     }
 }
