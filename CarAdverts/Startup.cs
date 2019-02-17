@@ -1,8 +1,10 @@
-﻿using CarAdverts.Middlewares;
+﻿using CarAdverts.Infrastructure.Contexts;
+using CarAdverts.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
@@ -79,6 +81,12 @@ namespace CarAdverts
             {
                 s.SwaggerEndpoint("/swagger/v1/swagger.json", "CarAdvert WEB API v1.0");
             });
+
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<CarAdvertContext>();
+                context.Database.Migrate();
+            }
         }
     }
 }
