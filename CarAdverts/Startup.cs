@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CarAdverts.Middlewares;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -65,6 +66,7 @@ namespace CarAdverts
             });
 
             app.UseHttpsRedirection();
+            app.UseMiddleware<ExceptionsGlobalHandlerMiddleware>();
             app.UseMvc();
 
             app.UseSwagger();
