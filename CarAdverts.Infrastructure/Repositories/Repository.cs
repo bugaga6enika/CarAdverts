@@ -59,6 +59,8 @@ namespace CarAdverts.Infrastructure.Repositories
             }
 
             DbSet.Remove(entity);
+
+            // ToDo: raise delete event
         }
 
         protected virtual IQueryable<TAggregateRoot> OrderBy(IQueryable<TAggregateRoot> query, string sortOptions)

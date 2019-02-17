@@ -28,6 +28,8 @@ namespace CarAdverts.Domain.CarAdvert
             SetPrice(price);
             SetFuel(fuelType);
             SetAsNew();
+
+            //ToDo: raise create event
         }
 
         /// <summary>
@@ -41,6 +43,8 @@ namespace CarAdverts.Domain.CarAdvert
         private CarAdvert(string title, decimal price, FuelType fuelType, int mileage, string firstRegistrationDate) : this(title, price, fuelType)
         {
             SetAsOld(mileage, firstRegistrationDate);
+
+            //ToDo: raise create event
         }
 
         /// <summary>
@@ -54,6 +58,8 @@ namespace CarAdverts.Domain.CarAdvert
         private CarAdvert(string title, decimal price, FuelType fuelType, int mileage, DateTime firstRegistrationDate) : this(title, price, fuelType)
         {
             SetAsOld(mileage, firstRegistrationDate);
+
+            //ToDo: raise create event
         }
 
         #region Setters
@@ -154,10 +160,54 @@ namespace CarAdverts.Domain.CarAdvert
 
                 SetAsOld(carAdvertDto.Mileage.Value, carAdvertDto.FirstRegistration);
             }
+
+            //ToDo: raise update event
         }
+
+        #region Overrides
 
         protected override bool AreKeysEquals(Guid self, Guid other)
             => self.Equals(other);
+
+        protected override bool AreEquals(IEntity<Guid> self, IEntity<Guid> other)
+        {
+            var _this = self as CarAdvert;
+            var _other = other as CarAdvert;
+
+            if (_this.Title != _other.Title)
+            {
+                return false;
+            }
+
+            if (_this.Price != _other.Price)
+            {
+                return false;
+            }
+
+            if (_this.Fuel != _other.Fuel)
+            {
+                return false;
+            }
+
+            if (_this.New != _other.New)
+            {
+                return false;
+            }
+
+            if (_this.Mileage != _other.Mileage)
+            {
+                return false;
+            }
+
+            if (_this.FirstRegistration != _other.FirstRegistration)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion
 
         #region Fabrics
 
@@ -185,6 +235,8 @@ namespace CarAdverts.Domain.CarAdvert
 
         public static CarAdvert Create(CarAdvertDto carAdvertDto)
             => carAdvertDto.New ? CreateNew(carAdvertDto) : CreateOld(carAdvertDto);
+
+
 
         #endregion
     }
