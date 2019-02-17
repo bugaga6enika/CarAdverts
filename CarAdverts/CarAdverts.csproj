@@ -15,4 +15,8 @@
     <ProjectReference Include="..\CarAdverts.Application\CarAdverts.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Configurations\" />
+  </ItemGroup>
+
 </Project>

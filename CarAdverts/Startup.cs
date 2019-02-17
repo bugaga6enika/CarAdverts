@@ -21,7 +21,10 @@ namespace CarAdverts
         {
             Application.Configurations.IoC.RegisterServices(services);
 
-            services.AddMvc()
+            services.AddMvcCore()
+                .AddJsonFormatters()
+                .AddApiExplorer()
+                .AddCors()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSwaggerGen(s =>
@@ -47,6 +50,13 @@ namespace CarAdverts
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCors(c =>
+            {
+                c.AllowAnyHeader();
+                c.AllowAnyMethod();
+                c.AllowAnyOrigin();
+            });
 
             app.UseHttpsRedirection();
             app.UseMvc();
