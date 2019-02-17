@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace CarAdverts.Application.Configuratoins.AutoMapper.Profiles
+namespace CarAdverts.Application.Configurations.AutoMapper.Profiles
 {
     public class CarAdvertDomainToDtoProfile : Profile
     {

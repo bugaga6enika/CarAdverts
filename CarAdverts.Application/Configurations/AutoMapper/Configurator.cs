@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using CarAdverts.Application.Configuratoins.AutoMapper.Profiles;
+using CarAdverts.Application.Configurations.AutoMapper.Profiles;
 
-namespace CarAdverts.Application.Configuratoins.AutoMapper
+namespace CarAdverts.Application.Configurations.AutoMapper
 {
     internal static class Configurator
     {

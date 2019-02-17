@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CarAdverts.Application.CarAdvert.Queries;
-using CarAdverts.Application.Configuratoins.AutoMapper.Profiles;
+using CarAdverts.Application.Configurations.AutoMapper.Profiles;
 using CarAdverts.Domain.CarAdvert;
 using CarAdverts.Domain.Core.Persistence;
 using CarAdverts.Infrastructure.Contexts;
@@ -10,7 +10,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace CarAdverts.Application.Configuratoins
+namespace CarAdverts.Application.Configurations
 {
     public static class IoC
     {
