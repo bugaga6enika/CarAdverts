@@ -2,6 +2,7 @@
 using CarAdverts.Domain.CarAdvert;
 using CarAdverts.IntegrationTests.Configurations;
 using FluentAssertions;
+using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -25,12 +26,7 @@ namespace CarAdverts.IntegrationTests.Endpoints
 
             var carAdverts = await GetAsList(httpResponse);
 
-            var carAdvert = carAdverts.FirstOrDefault();
-
-            var createCommand = new DeleteCommand
-            {
-               Id = carAdvert.Id
-            };
+            var carAdvert = carAdverts.FirstOrDefault();           
 
             var updateHttpResponse = await Client.DeleteAsync($"{Endpoint}/{carAdvert.Id}");
 
@@ -39,6 +35,14 @@ namespace CarAdverts.IntegrationTests.Endpoints
             var deletedCarAdvertHttpResponse = await Client.GetAsync($"{Endpoint}/{carAdvert.Id}");
 
             deletedCarAdvertHttpResponse.StatusCode.Should().Be(HttpStatusCode.NoContent);
+        }
+
+        [Fact]
+        public async Task Delete_Of_The_CarAdvert_Response_Should_Be_Bad_Request()
+        {
+            var httpResponse = await Client.DeleteAsync($"{Endpoint}/{Guid.Empty}");          
+
+            httpResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         }
     }
 }
