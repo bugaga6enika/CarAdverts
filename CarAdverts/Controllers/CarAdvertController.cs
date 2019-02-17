@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CarAdverts.Controllers
 {
-    [Route("api/car-advert")]
+    [Route("api/car-adverts")]
     [ApiController]
     public class CarAdvertController : ControllerBase
     {
@@ -23,6 +23,14 @@ namespace CarAdverts.Controllers
         public async Task<IActionResult> Get(Guid id)
         {
             var response = await _mediator.Send(new GetByIdQuery { Id = id });
+
+            return Ok(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get([FromQuery] GetAllQuery getAllQuery)
+        {
+            var response = await _mediator.Send(getAllQuery);
 
             return Ok(response);
         }

@@ -25,6 +25,10 @@ namespace CarAdverts
 
             services.AddMvcCore()
                 .AddJsonFormatters()
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+                })
                 .AddApiExplorer()
                 .AddCors()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

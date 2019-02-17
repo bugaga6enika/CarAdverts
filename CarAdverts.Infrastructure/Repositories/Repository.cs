@@ -1,6 +1,10 @@
 ﻿using CarAdverts.Domain.Core.Models;
 using CarAdverts.Domain.Core.Persistence;
+using CarAdverts.Domain.Core.Validation;
+using CarAdverts.Infrastructure.Specifications;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 
 namespace CarAdverts.Infrastructure.Repositories
@@ -18,29 +22,57 @@ namespace CarAdverts.Infrastructure.Repositories
             DbSet = _context.Set<TAggregateRoot>();
         }
 
-        public async Task<TAggregateRoot> Create(TAggregateRoot aggregateRoot)
+        public virtual Task<TAggregateRoot> GetByIdAsync(TKey key)
+        {
+            return DbSet.FindAsync(key);
+        }
+
+        public virtual Task<IQueryable<TAggregateRoot>> GetAsync(string sortOptions)
+        {
+            var query = DbSet.AsQueryable();
+
+            query = OrderBy(query, sortOptions);
+
+            return Task.FromResult(query);
+        }
+
+        public virtual async Task<TAggregateRoot> CreateAsync(TAggregateRoot aggregateRoot)
         {
             var entityEntry = await DbSet.AddAsync(aggregateRoot);
             return entityEntry.Entity;
         }
 
-        public Task Delete(TKey key)
+        public virtual Task UpdateAsync(TAggregateRoot aggregateRoot)
+        {
+            DbSet.Update(aggregateRoot);
+
+            return Task.CompletedTask;
+        }
+
+        public virtual Task DeleteAsync(TKey key)
         {
             DbSet.Remove(DbSet.Find(key));
 
             return Task.CompletedTask;
         }
 
-        public Task<TAggregateRoot> GetByIdAsync(TKey key)
+        protected virtual IQueryable<TAggregateRoot> OrderBy(IQueryable<TAggregateRoot> query, string sortOptions)
         {
-            return DbSet.FindAsync(key);
-        }
+            var sortByOpions = new SortOptions(sortOptions);
 
-        public Task Update(TAggregateRoot aggregateRoot)
-        {
-            DbSet.Update(aggregateRoot);
+            if (sortByOpions.IsValid)
+            {
+                try
+                {
+                    query = query.OrderBy(sortByOpions.ToString());
+                }
+                catch (System.Exception e)
+                {
+                    throw new ValidationException(e.Message, "OrderBy");
+                }
+            }
 
-            return Task.CompletedTask;
+            return query;
         }
     }
 }

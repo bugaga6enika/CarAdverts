@@ -25,7 +25,7 @@ namespace CarAdverts.Application.CarAdvert.Commands
             var dto = Mapper.Map<Domain.CarAdvert.CarAdvertDto>(request);
             var carAdvertAggregateRoot = await _carAdvertRepository.GetByIdAsync(request.Id);
             carAdvertAggregateRoot.Update(dto);
-            await _carAdvertRepository.Update(carAdvertAggregateRoot);
+            await _carAdvertRepository.UpdateAsync(carAdvertAggregateRoot);
             await _unitOfWork.CommitAsync();
 
             return Unit.Value;

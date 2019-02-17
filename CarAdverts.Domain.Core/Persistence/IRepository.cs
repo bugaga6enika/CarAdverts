@@ -1,4 +1,5 @@
 ﻿using CarAdverts.Domain.Core.Models;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CarAdverts.Domain.Core.Persistence
@@ -8,8 +9,9 @@ namespace CarAdverts.Domain.Core.Persistence
         where TKey : struct
     {
         Task<TAggregateRoot> GetByIdAsync(TKey key);
-        Task<TAggregateRoot> Create(TAggregateRoot aggregateRoot);
-        Task Update(TAggregateRoot aggregateRoot);
-        Task Delete(TKey key);
+        Task<IQueryable<TAggregateRoot>> GetAsync(string sortOptions);
+        Task<TAggregateRoot> CreateAsync(TAggregateRoot aggregateRoot);
+        Task UpdateAsync(TAggregateRoot aggregateRoot);
+        Task DeleteAsync(TKey key);
     }
 }

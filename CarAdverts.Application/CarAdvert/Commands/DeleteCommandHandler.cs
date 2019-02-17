@@ -21,7 +21,7 @@ namespace CarAdverts.Application.CarAdvert.Commands
 
         public async Task<Unit> Handle(DeleteCommand request, CancellationToken cancellationToken)
         {
-            await _carAdvertRepository.Delete(request.Id);
+            await _carAdvertRepository.DeleteAsync(request.Id);
             await _unitOfWork.CommitAsync();
 
             return Unit.Value;
