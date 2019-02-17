@@ -1,6 +1,6 @@
-﻿using CarAdverts.Domain.CarAdvert;
+﻿using AutoMapper;
+using CarAdverts.Domain.CarAdvert;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,7 +19,7 @@ namespace CarAdverts.Application.CarAdvert.Queries
         {
             var carAdvert = await _carAdvertRepository.GetByIdAsync(request.Id);
 
-            return new Dtos.CarAdvertDto { Id = carAdvert.Id };
+            return Mapper.Map<Dtos.CarAdvertDto>(carAdvert);
         }
     }
 }

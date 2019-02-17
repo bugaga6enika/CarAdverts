@@ -37,6 +37,9 @@ namespace CarAdverts.Domain.CarAdvert
         protected override int GetHashCodeCore()
             => Date.HasValue ? Date.Value.Date.GetHashCode() : 0;
 
+        public override string ToString()
+            => Date.HasValue ? Date.Value.ToString(BaseDateFormat) : "";
+
         public static RegistrationDate Create(string date) => new RegistrationDate(date);
         public static RegistrationDate Create(DateTime date) => new RegistrationDate(date.ToString(BaseDateFormat));
         public static RegistrationDate NotSpecified => new RegistrationDate();

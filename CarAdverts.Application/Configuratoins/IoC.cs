@@ -1,4 +1,6 @@
-﻿using CarAdverts.Application.CarAdvert.Queries;
+﻿using AutoMapper;
+using CarAdverts.Application.CarAdvert.Queries;
+using CarAdverts.Application.Configuratoins.AutoMapper.Profiles;
 using CarAdverts.Domain.CarAdvert;
 using CarAdverts.Domain.Core.Persistence;
 using CarAdverts.Infrastructure.Contexts;
@@ -20,6 +22,13 @@ namespace CarAdverts.Application.Configuratoins
             services.AddScoped<IContext<Domain.CarAdvert.CarAdvert, Guid>, CarAdvertContext>();
 
             services.AddMediatR(typeof(GetByIdQueryHandler));
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<CarAdvertDomainToDtoProfile>();
+            });
+
+            services.AddAutoMapper();
         }
     }
 }
