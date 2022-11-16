@@ -22,14 +22,14 @@ namespace CarAdverts.Infrastructure.Repositories
             DbSet = _context.Set<TAggregateRoot>();
         }
 
-        public virtual Task<TAggregateRoot> GetByIdAsync(TKey key)
+        public virtual ValueTask<TAggregateRoot> GetByIdAsync(TKey key)
         {
             return DbSet.FindAsync(key);
         }
 
         public virtual Task<IQueryable<TAggregateRoot>> GetAsync(string sortOptions)
         {
-            var query = DbSet.AsQueryable();
+            var query = DbSet.AsQueryable().AsNoTracking();
 
             query = OrderBy(query, sortOptions);
 

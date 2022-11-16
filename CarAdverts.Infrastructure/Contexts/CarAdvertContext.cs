@@ -28,7 +28,8 @@ namespace CarAdverts.Infrastructure.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"))
+                /*.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)*/;
         }
     }
 }

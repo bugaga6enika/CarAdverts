@@ -7,27 +7,28 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CarAdverts.Application.CarAdvert.Commands
+namespace CarAdverts.Application.CarAdvert.Commands;
+
+internal class CreateCommandHandler : IRequestHandler<CreateCommand, Dtos.CarAdvertDto>
 {
-    internal class CreateCommandHandler : IRequestHandler<CreateCommand, Dtos.CarAdvertDto>
+    private readonly ICarAdvertRepository _carAdvertRepository;
+    private readonly IUnitOfWork<CarAdvertContext, Domain.CarAdvert.CarAdvert, Guid> _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public CreateCommandHandler(ICarAdvertRepository carAdvertRepository, IUnitOfWork<CarAdvertContext, Domain.CarAdvert.CarAdvert, Guid> unitOfWork, IMapper mapper)
     {
-        private readonly ICarAdvertRepository _carAdvertRepository;
-        private readonly IUnitOfWork<CarAdvertContext, Domain.CarAdvert.CarAdvert, Guid> _unitOfWork;
+        _carAdvertRepository = carAdvertRepository ?? throw new ArgumentNullException(nameof(carAdvertRepository));
+        _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+        _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+    }
 
-        public CreateCommandHandler(ICarAdvertRepository carAdvertRepository, IUnitOfWork<CarAdvertContext, Domain.CarAdvert.CarAdvert, Guid> unitOfWork)
-        {
-            _carAdvertRepository = carAdvertRepository;
-            _unitOfWork = unitOfWork;
-        }
+    public async Task<Dtos.CarAdvertDto> Handle(CreateCommand request, CancellationToken cancellationToken)
+    {
+        var dto = _mapper.Map<CarAdvertDto>(request);
+        var carAdvertAggregateRoot = Domain.CarAdvert.CarAdvert.Create(dto);
+        var carAdvertEntity = await _carAdvertRepository.CreateAsync(carAdvertAggregateRoot).ConfigureAwait(false);
+        await _unitOfWork.CommitAsync();
 
-        public async Task<Dtos.CarAdvertDto> Handle(CreateCommand request, CancellationToken cancellationToken)
-        {
-            var dto = Mapper.Map<Domain.CarAdvert.CarAdvertDto>(request);
-            var carAdvertAggregateRoot = Domain.CarAdvert.CarAdvert.Create(dto);
-            var carAdvertEntity = await _carAdvertRepository.CreateAsync(carAdvertAggregateRoot).ConfigureAwait(false);
-            await _unitOfWork.CommitAsync();
-
-            return Mapper.Map<Dtos.CarAdvertDto>(carAdvertEntity);
-        }
+        return _mapper.Map<Dtos.CarAdvertDto>(carAdvertEntity);
     }
 }
