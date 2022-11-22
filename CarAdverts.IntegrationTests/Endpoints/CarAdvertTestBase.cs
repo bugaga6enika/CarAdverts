@@ -8,12 +8,12 @@ using Xunit;
 
 namespace CarAdverts.IntegrationTests.Endpoints
 {
-    public abstract class CarAdvertTestBase : IClassFixture<CarAdvertsWebApplicationFactory<Startup>>
+    public abstract class CarAdvertTestBase : IClassFixture<CarAdvertsWebApplicationFactory<Program>>
     {
         protected const string Endpoint = "/api/car-adverts";
         protected readonly HttpClient Client;
 
-        public CarAdvertTestBase(CarAdvertsWebApplicationFactory<Startup> factory)
+        public CarAdvertTestBase(CarAdvertsWebApplicationFactory<Program> factory)
         {
             Client = factory.CreateClient();
         }

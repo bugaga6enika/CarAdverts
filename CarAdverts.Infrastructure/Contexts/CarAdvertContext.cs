@@ -2,7 +2,6 @@
 using CarAdverts.Domain.Core.Persistence;
 using CarAdverts.Infrastructure.Configurations;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System;
 
 namespace CarAdverts.Infrastructure.Contexts
@@ -11,12 +10,9 @@ namespace CarAdverts.Infrastructure.Contexts
     {
         public DbSet<CarAdvert> CarAdverts { get; set; }
 
-        private readonly IConfiguration _configuration;
-
-        public CarAdvertContext(DbContextOptions<CarAdvertContext> options, IConfiguration configuration)
+        public CarAdvertContext(DbContextOptions<CarAdvertContext> options)
             : base(options)
         {
-            _configuration = configuration;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,8 +24,7 @@ namespace CarAdverts.Infrastructure.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"))
-                /*.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)*/;
+            optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         }
     }
 }

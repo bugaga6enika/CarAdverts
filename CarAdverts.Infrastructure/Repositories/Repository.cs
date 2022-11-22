@@ -1,8 +1,10 @@
-﻿using CarAdverts.Domain.Core.Models;
+﻿using CarAdverts.Domain.CarAdvert;
+using CarAdverts.Domain.Core.Models;
 using CarAdverts.Domain.Core.Persistence;
 using CarAdverts.Domain.Core.Validation;
 using CarAdverts.Infrastructure.Specifications;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
@@ -29,7 +31,7 @@ namespace CarAdverts.Infrastructure.Repositories
 
         public virtual Task<IQueryable<TAggregateRoot>> GetAsync(string sortOptions)
         {
-            var query = DbSet.AsQueryable().AsNoTracking();
+            var query = DbSet.AsQueryable();
 
             query = OrderBy(query, sortOptions);
 
@@ -73,7 +75,7 @@ namespace CarAdverts.Infrastructure.Repositories
                 {
                     query = query.OrderBy(sortByOpions.ToString());
                 }
-                catch (System.Exception e)
+                catch (Exception e)
                 {
                     throw new ValidationException(e.Message, "OrderBy");
                 }

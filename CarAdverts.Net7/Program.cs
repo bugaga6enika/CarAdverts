@@ -1,10 +1,18 @@
 using CarAdverts.Application.Configurations;
+using CarAdverts.Infrastructure.Contexts;
 using CarAdverts.Net7.Middlewares;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 IoC.RegisterServices(builder.Services);
+
+builder.Services.AddDbContext<CarAdvertContext>((container, contextOptionsBuilder) =>
+{
+    var configuration = container.GetRequiredService<IConfiguration>();
+    contextOptionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+});
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -47,3 +55,5 @@ app.UseMiddleware<ExceptionsGlobalHandlerMiddleware>();
 //});
 
 app.Run();
+
+public partial class Program { }

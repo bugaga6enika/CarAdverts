@@ -39,7 +39,7 @@ public class CarAdvertController : ControllerBase
     {
         var response = await _mediator.Send(createCommand).ConfigureAwait(false);
 
-        return CreatedAtRoute("GetById", response);
+        return CreatedAtRoute("GetById", new { response.Id }, response);
     }
 
     [HttpPut]

@@ -14,9 +14,9 @@ namespace CarAdverts.UnitTests.CarAdvert
         public void RegistrationDate_Must_Be_Valid_For_Selected_ISO_Date_Formats(string date, string format)
         {
             var registrationDate = RegistrationDate.Create(date);
-            var parsedDate = DateTime.ParseExact(date, format, CultureInfo.InvariantCulture);
+            var parsedDate = DateOnly.ParseExact(date, format, CultureInfo.InvariantCulture);
 
-            var areEquals = registrationDate.Date == parsedDate.Date;
+            var areEquals = registrationDate.Date == parsedDate;
 
             areEquals.Should().Be(true);
         }
@@ -45,7 +45,7 @@ namespace CarAdverts.UnitTests.CarAdvert
 
             var firstRegistrationDate =  RegistrationDate.Create(date);
 
-            firstRegistrationDate.Date.Should().Be(date.Date);
+            firstRegistrationDate.Date.Should().Be(DateOnly.FromDateTime(date));
         }
 
         [TestCase("20190216", "2019-02-16")]
