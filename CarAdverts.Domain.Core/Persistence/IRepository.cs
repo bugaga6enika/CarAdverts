@@ -8,7 +8,7 @@ namespace CarAdverts.Domain.Core.Persistence
         where TAggregateRoot : IAggregateRoot<TKey>
         where TKey : struct
     {
-        Task<TAggregateRoot> GetByIdAsync(TKey key);
+        ValueTask<TAggregateRoot> GetByIdAsync(TKey key);
         Task<IQueryable<TAggregateRoot>> GetAsync(string sortOptions);
         Task<TAggregateRoot> CreateAsync(TAggregateRoot aggregateRoot);
         Task UpdateAsync(TAggregateRoot aggregateRoot);

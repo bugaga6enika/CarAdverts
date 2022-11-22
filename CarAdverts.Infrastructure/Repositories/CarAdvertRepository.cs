@@ -1,6 +1,9 @@
 ﻿using CarAdverts.Domain.CarAdvert;
 using CarAdverts.Domain.Core.Persistence;
+using CarAdverts.Infrastructure.Specifications;
 using System;
+using System.Linq;
+using System.Linq.Dynamic.Core;
 
 namespace CarAdverts.Infrastructure.Repositories
 {
@@ -8,6 +11,6 @@ namespace CarAdverts.Infrastructure.Repositories
     {
         public CarAdvertRepository(IContext<CarAdvert, Guid> context) : base(context)
         {
-        }
+        }       
     }
 }

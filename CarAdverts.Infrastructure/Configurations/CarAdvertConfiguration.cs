@@ -1,4 +1,5 @@
 ﻿using CarAdverts.Domain.CarAdvert;
+using CarAdverts.Infrastructure.ValueConverters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,6 +18,7 @@ namespace CarAdverts.Infrastructure.Configurations
 
             builder.Property(c => c.Price)
                 .HasColumnType("decimal(18, 6)")
+                .HasConversion<double>()
                 .IsRequired();
 
             builder.Property(x => x.Fuel)
@@ -30,10 +32,19 @@ namespace CarAdverts.Infrastructure.Configurations
                 .IsRequired(false);
 
             builder.OwnsOne(x => x.FirstRegistration)
-                .Property(x => x.Date)
+                .Property(property => property.Date)
+                .HasConversion<DateOnlyConverter, DateOnlyComparer>()
                 .HasColumnName("FirstRegistration")
                 .HasColumnType("date")
                 .IsRequired(false);
+            //    , navigationBuilder =>
+            //{
+            //    navigationBuilder.Property(property => property.Date)
+            //    .HasConversion<DateOnlyConverter, DateOnlyComparer>()
+            //    .HasColumnName("FirstRegistration")
+            //    .HasColumnType("date")
+            //    .IsRequired(false);
+            //});
         }
     }
 }

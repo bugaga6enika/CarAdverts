@@ -11,7 +11,7 @@ namespace CarAdverts.Domain.CarAdvert
         public FuelType Fuel { get; protected set; }
         public bool New { get; protected set; }
         public int? Mileage { get; protected set; }
-        public RegistrationDate FirstRegistration { get; protected set; }
+        public RegistrationDate? FirstRegistration { get; protected set; }
 
         private CarAdvert() { }
 

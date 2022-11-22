@@ -9,7 +9,7 @@ namespace CarAdverts.IntegrationTests.Endpoints
 {
     public class CarAdvertGetAllTests : CarAdvertTestBase
     {
-        public CarAdvertGetAllTests(CarAdvertsWebApplicationFactory<Startup> factory) : base(factory)
+        public CarAdvertGetAllTests(CarAdvertsWebApplicationFactory<Program> factory) : base(factory)
         {
         }
 
@@ -60,7 +60,7 @@ namespace CarAdverts.IntegrationTests.Endpoints
         [Fact]
         public async Task Get_All_Car_Adverts_With_OrderBy_Price_And_RegistrationDate_Desc_Should_Be_Accurate()
         {
-            var httpResponse = await Client.GetAsync($"{Endpoint}?orderby=price,firstRegistration desc");
+            var httpResponse = await Client.GetAsync($"{Endpoint}?orderby=price,firstRegistration.date desc");
 
             httpResponse.EnsureSuccessStatusCode();
 

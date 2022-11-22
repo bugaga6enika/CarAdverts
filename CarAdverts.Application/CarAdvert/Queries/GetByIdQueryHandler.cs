@@ -4,22 +4,23 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CarAdverts.Application.CarAdvert.Queries
+namespace CarAdverts.Application.CarAdvert.Queries;
+
+public class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, Dtos.CarAdvertDto>
 {
-    public class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, Dtos.CarAdvertDto>
+    private readonly ICarAdvertRepository _carAdvertRepository;
+    private readonly IMapper _mapper;
+
+    public GetByIdQueryHandler(ICarAdvertRepository carAdvertRepository, IMapper mapper)
     {
-        private readonly ICarAdvertRepository _carAdvertRepository;
+        _carAdvertRepository = carAdvertRepository ?? throw new System.ArgumentNullException(nameof(carAdvertRepository));
+        _mapper = mapper ?? throw new System.ArgumentNullException(nameof(mapper));
+    }
 
-        public GetByIdQueryHandler(ICarAdvertRepository carAdvertRepository)
-        {
-            _carAdvertRepository = carAdvertRepository;
-        }
+    public async Task<Dtos.CarAdvertDto> Handle(GetByIdQuery request, CancellationToken cancellationToken)
+    {
+        var carAdvert = await _carAdvertRepository.GetByIdAsync(request.Id).ConfigureAwait(false);
 
-        public async Task<Dtos.CarAdvertDto> Handle(GetByIdQuery request, CancellationToken cancellationToken)
-        {
-            var carAdvert = await _carAdvertRepository.GetByIdAsync(request.Id).ConfigureAwait(false);
-
-            return Mapper.Map<Dtos.CarAdvertDto>(carAdvert);
-        }
+        return _mapper.Map<Dtos.CarAdvertDto>(carAdvert);
     }
 }

@@ -4,6 +4,7 @@ using CarAdverts.IntegrationTests.Configurations;
 using FluentAssertions;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -11,7 +12,7 @@ namespace CarAdverts.IntegrationTests.Endpoints
 {
     public class CarAdvertUpdateTests : CarAdvertTestBase
     {
-        public CarAdvertUpdateTests(CarAdvertsWebApplicationFactory<Startup> factory) : base(factory)
+        public CarAdvertUpdateTests(CarAdvertsWebApplicationFactory<Program> factory) : base(factory)
         {
         }
 
@@ -26,7 +27,7 @@ namespace CarAdverts.IntegrationTests.Endpoints
 
             var carAdvert = carAdverts.FirstOrDefault();
 
-            var createCommand = new CreateCommand
+            var updateCommand = new UpdateCommand
             {
                 Title = "Test",
                 Price = 33,
@@ -36,13 +37,13 @@ namespace CarAdverts.IntegrationTests.Endpoints
                 FirstRegistration = "2008-02-12"
             };
 
-            var updateHttpResponse = await Client.PutAsJsonAsync($"{Endpoint}/{carAdvert.Id}", createCommand);
+            var updateHttpResponse = await Client.PutAsJsonAsync($"{Endpoint}/{carAdvert.Id}", updateCommand);
 
-            httpResponse.EnsureSuccessStatusCode();
+            updateHttpResponse.EnsureSuccessStatusCode();
 
             var updatedCarAdvertHttpResponse = await Client.GetAsync($"{Endpoint}/{carAdvert.Id}");
 
-            httpResponse.EnsureSuccessStatusCode();
+            updatedCarAdvertHttpResponse.EnsureSuccessStatusCode();
 
             var updatedCarAdvert = await GetAsInstance(updatedCarAdvertHttpResponse);
 

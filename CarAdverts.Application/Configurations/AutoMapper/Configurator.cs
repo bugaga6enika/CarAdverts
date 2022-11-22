@@ -5,12 +5,10 @@ namespace CarAdverts.Application.Configurations.AutoMapper
 {
     internal static class Configurator
     {
-        public static MapperConfiguration RegisterMappings()
+        public static void RegisterMappings(IMapperConfigurationExpression cfg)
         {
-            return new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new CarAdvertDomainToDtoProfile());
-            });
+            cfg.AddProfile(new CarAdvertDomainToDtoProfile());
+            cfg.AddProfile(new CarAdvertCommandToDtoProfile());
         }
     }
 }

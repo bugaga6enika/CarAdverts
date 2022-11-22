@@ -10,7 +10,7 @@ namespace CarAdverts.IntegrationTests.Endpoints
 {
     public class CarAdvertGetByIdTests : CarAdvertTestBase
     {
-        public CarAdvertGetByIdTests(CarAdvertsWebApplicationFactory<Startup> factory) : base(factory)
+        public CarAdvertGetByIdTests(CarAdvertsWebApplicationFactory<Program> factory) : base(factory)
         {
         }
 
